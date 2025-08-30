@@ -4,8 +4,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import org.example.webhooktest.dto.messageDto;
 
 @Entity
+@Getter
+@Setter
+@RequiredArgsConstructor
+@Builder
 public class Message {
 
     @Id
@@ -14,26 +23,30 @@ public class Message {
 
     private String content;
 
-    public Message() {}
+    private String title;
+    private String author;
+    private String date;
+    private String url;
+    private String type;
 
-    public Message(String content) {
+    public Message(String content, String title, String author, String date, String url, String type) {
         this.content = content;
+        this.title = title;
+        this.author = author;
+        this.date = date;
+        this.url = url;
+        this.type = type;
     }
 
-    // Getters and Setters
-    public Long getId() {
-        return id;
-    }
+    public messageDto entityToDto() {
+        return messageDto.builder()
+                .content(this.content)
+                .title(this.title)
+                .author(this.author)
+                .date(this.date)
+                .url(this.url)
+                .type(this.type)
+                .build();
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 }
