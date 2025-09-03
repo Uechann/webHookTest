@@ -2,21 +2,18 @@ package org.example.webhooktest.service;
 
 import org.example.webhooktest.entity.Message;
 import org.example.webhooktest.repository.MessageRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class MessageService {
 
     private final MessageRepository messageRepository;
-
-    @Autowired
-    public MessageService(MessageRepository messageRepository) {
-        this.messageRepository = messageRepository;
-    }
 
     public Message saveMessage(Message message) {
         return (Message) messageRepository.save(message);
@@ -30,4 +27,7 @@ public class MessageService {
         return messageRepository.findById(id);
     }
 
+    public void deleteMessage(Long id) {
+        messageRepository.deleteById(id);
+    }
 }
