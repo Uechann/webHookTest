@@ -8,10 +8,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import lombok.Builder;
 
+import lombok.RequiredArgsConstructor;
 import org.example.webhooktest.entity.Message;
 
 @Entity
 @Builder
+@RequiredArgsConstructor
 public class User {
     
     @Id
